@@ -1,0 +1,72 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+
+% Theorem-style environments
+\theoremstyle{definition}
+\newtheorem{exercise}{Exercise}
+
+\theoremstyle{remark}
+\newtheorem*{solution}{Solution}
+
+\title{Linear Algebra Done Right -- Chapter 3 Solutions}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Exercises 3B}
+
+\begin{exercise}
+    Give an example of a linear map $T$ widh dim null $T$ = 3 and dim range $T$ = 2.
+\end{exercise}
+
+The intuition behind the solution is that we can define a linear map just on the values 
+on a basis of the linear space V we choose. I will choose V to be $\mathbb{R}^5$ and 
+$T \in \mathcal{L(V)}$.
+
+Therefore, I define $T:\mathbb{R}^5 \rightarrow \mathbb{R}^5$ with: 
+\begin{itemize}
+    \item{T ((1,0,0,0,0))=0}
+    \item{T ((0,1,0,0,0))=0}
+    \item{T ((0,0,1,0,0))=0}
+    \item{T ((0,0,0,1,0))= (0,0,0,1,0)}
+    \item{T ((0,0,0,0,1))= (0,0,0,0,1)}
+\end{itemize}
+
+It is clear that null $T$ has a basis the first 3 basis vectors of $\mathbb{R}^5$ and 
+the range of $T$ has as a basis the last 2 basis vectors of $\mathbb{R}^5$.
+
+\begin{exercise}
+    Suppose $S,T \in \mathcal{L}(V)$ such that range $S$ $\subseteq$ null $T$. Prove that $(ST)^2$=0. 
+\end{exercise}
+
+\begin{solution}
+$(ST)^2(v)=(ST)(ST(v))$. We have that $ST(V) \in$ range $S$. Therefore $ST(V) \in$ null $T$.
+
+Which means that $T(ST(v))=0,\forall v \in V$. Therefore $(ST) ^2(v)=S(0)=0$, because $S$ is a linear map.
+\end{solution}
+
+\begin{exercise}
+    Suppose $v_1,\cdots ,v_m$ is a list of vectors in $V$. Define $T \in (\mathcal{F}^{m},V)$ by: 
+    \[
+    T(z_1,\cdots,z_m)=z_1v_1+\cdots+z_mv_m.
+    \]
+\begin{itemize}
+    \item What property of $T$ corresponds to $v_1,\dots,v_m$ spanning $V$?
+    \item What property of $T$ corresponds to the list $v_1,\dots,v_m$ being linearly independent?
+\end{itemize}
+\end{exercise}
+\begin{solution} To answer the questions in order:
+    \begin{itemize}
+    \item If $v_1,\dots,v_m$ span V, then $T$ would be surjective as practically range $T$ is just span $V$.
+
+    \item If $v_1,\dots,v_m$ are linearly independent, this means that $T(z_1,\dots,z_m)=0$ only if $z_1=\cdots=z_m=0$, therefore dim null $T$ =0 , so it is injective.
+    \end{itemize}
+\end{solution}
+
+\end{document}
