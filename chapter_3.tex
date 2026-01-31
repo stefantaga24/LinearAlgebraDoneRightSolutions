@@ -69,4 +69,80 @@ Which means that $T(ST(v))=0,\forall v \in V$. Therefore $(ST) ^2(v)=S(0)=0$, be
     \end{itemize}
 \end{solution}
 
+\begin{exercise}
+    Show that X = $\{$ $T \in \mathcal{L}(\mathbb{R}^5,\mathbb{R}^4)$: dim null $T > 2$ $\}$ is not a subspace of $\mathcal{L}(\mathbb{R}^5,\mathbb{R}^4)$
+\end{exercise}
+
+\begin{solution} My intuition for this exercise was just to build two linear maps that had no overlap of values over the basis. So in one case,
+one of the maps would map a basis vector to 0 and in another it would map the basis vector to itself.
+
+Therefore, let $v_1,\dots,v_5$ be a basis of $\mathbb{R^5}$. I define the following maps $T_1$ and $T_2$:
+\begin{itemize}
+    \item $T_1(v_1)=v_1$,$T_1(v_2)=v_2$,$T_1(v_3)=0$,$T_1(v_4)=0$,$T_1(v_5)=0$
+    \item $T_2(v_1)=0$,$T_2(v_2)=0$,$T_2(v_3)=v_3$,$T_2(v_4)=v_4$,$T_2(v_5)=0$
+\end{itemize}
+
+Both of them clearly have dim null $T_1$ = dim null $T_2$ = 3. 
+
+However, when we calculate $T_1+T_2$ we get: 
+\begin{itemize}
+    \item $(T_1+T_2)(v_1)=v_1$, $(T_1+T_2)(v_2)=v_2$, $(T_1+T_2)(v_3)=v_3$, $(T_1+T_2)(v_4)=v_4$, $(T_1+T_2)(v_5)=v_5$
+\end{itemize}
+
+Therefore, dim null $T_1+T_2$ = 1 , which means that $T_1+T_2 \notin X$ which shows
+that the set X is not closed under addition, therefore it cannot be a subspace. 
+\end{solution}
+
+\begin{exercise}
+Give an example of $T \in \mathcal{L}(\mathbb{R}^4)$ such that range $T$ = null $T$. 
+\end{exercise}
+\begin{solution}
+My intuition behind this problem was that if range $T$ = null $T$, then T(T(x))=0, $\forall{x} \in \mathbb{R}^4$. 
+Now, I did "cheat" a little bit by thinking that $T$ was a matrix and just looking for a matrix with $T^2=0$ , where 0 here is the null $4 \times 4$ matrix.
+
+Therefore, the final map that I have reached is: $T(x_1,x_2,x_3,x_4)=(x_1-x_4,x_2-x_3,x_2-x_3,x_1-x_4)=(x_1-x_4)*(1,0,0,1)+(x_2-x_3)*(0,1,1,0)$. It is clear that
+the range is a linear combination between $(1,0,0,1)$ and $(0,1,1,0)$ which are linearly independent, therefore dim range $T$ = 0. We have that $$T(T(x))=0$$ which means
+that range $ T \subseteq $null $T$. 
+
+Now I need to prove that null $T \subseteq$ range $T$.
+
+Let $y \in $ null $T$ , be an arbitrary vector in $null T$. Therefore, $T(y_1,y_2,y_3,y_4)=0$ which means that $y_1=y_4,y_2=y_3$.
+
+I will choose $x_1=y_1,x_2=y_2,x_3=0,x_4=0$ , and get that $T(x_1,x_2,x_3,x_4)=(y_1,y_2,y_2,y_1)=(y_1,y_2,y_3,y_4)$. Therefore I have 
+found $x_1,x_2,x_3,x_4$ such that $T(x_1,x_2,x_3,x_4)=(y_1,y_2,y_3,y_4)$ so $y \in $ range $T$. Therefore null $T$ $\subseteq$ range $T$.
+
+So null $T$ = range $T$.
+\end{solution}
+
+\begin{exercise}
+    Prove that there does not exist $T \in \mathcal{L}(\mathbb{R}^5)$ such that range $T$ = null $T$.
+\end{exercise}
+\begin{solution}
+    We know that dim range $T$ + dim null $T$ = dim $\mathbb{R}^5$ , which means 2*dim range $T$ = 5 which is not possible as dim range $T$ is an integer.
+\end{solution}
+
+\begin{exercise}
+    Suppose $V$ and $W$ are finite-dimensional with 2 $\leq$ dim V $\leq$ dim W. Show that $\{T \in \mathcal{L}(V,W): T \text{ is not injective}\}$ is not a subspace of $\mathcal{L}(V,W)$.
+\end{exercise}
+\begin{solution}
+    I will build two maps that are not injective, but whose sum is. I will denote dim $V$ = n, dim $W$ = m.
+    Let $v_1,\dots,v_n$ be a basis of $V$ and $w_1,\dots,w_m$ be a basis of $W$. 
+    I can create the following mappings, using the fact that $2 \leq n \leq m$:
+    \begin{itemize}
+        \item $T_1(v_1)=w_1, T_1(v_2)=w_1, T_1(v_i)=w_i, \forall i \in \{3,\dots,n\}$
+        \item $T_2(v_1)=w_2, T_2(v_2)=-w_2, T_2(v_i)=w_i, \forall i \in \{3,\dots,n\}$
+    \end{itemize}
+    They are both not injective as their nullspaces do not have dimension $0$, clearly $T_1(v_1-v_2)=0$ and $T_2(v_1+v_2)=0$. 
+
+    If we look at $T_1+T_2$, we find that $(T_1+T_2)(v_1)=w_1+w_2,(T_1+T_2)(v_2)=w_1-w_2,\dots,(T_1+T_2)(v_i)=2*v_i, \forall i \in \{3,\dots,n\}$.
+    Let $x \in $ null $(T_1+T_2)$. We have that $(T_1+T_2)(x)=0$, we can write $x$ uniquely according to the basis $v_1,\dots,v_n$ and get that: 
+    $(T_1+T_2)(\alpha_1 v_1+\cdots+\alpha_n v_n)=0$. Therefore $\alpha_1(w_1+w_2)+\alpha_2(w_1-w_2)+\sum_{i=3}^n 2*\alpha_i w_i=0$.
+
+    So we get that $(\alpha_1+\alpha_2)w_1 + (\alpha_1-\alpha_2)w_2+\sum_{i=3}^{n} w_i =0$. We know that the w's are linearly independent, 
+    therefore $\alpha_i=0, \forall i \in \{3,\dots,n\}$ and $\alpha_1+\alpha_2=0$ and $\alpha_1-\alpha_2=0$. This means that $\alpha_1=\alpha_2=0$, so
+    x = 0. Therefore, null $T_1+T_2=\{0\}$, so it is injective, therefore the set given in the hypothesis is not a subspace.
+
+
+\end{solution}
+
 \end{document}
