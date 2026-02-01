@@ -136,13 +136,203 @@ So null $T$ = range $T$.
 
     If we look at $T_1+T_2$, we find that $(T_1+T_2)(v_1)=w_1+w_2,(T_1+T_2)(v_2)=w_1-w_2,\dots,(T_1+T_2)(v_i)=2*v_i, \forall i \in \{3,\dots,n\}$.
     Let $x \in $ null $(T_1+T_2)$. We have that $(T_1+T_2)(x)=0$, we can write $x$ uniquely according to the basis $v_1,\dots,v_n$ and get that: 
-    $(T_1+T_2)(\alpha_1 v_1+\cdots+\alpha_n v_n)=0$. Therefore $\alpha_1(w_1+w_2)+\alpha_2(w_1-w_2)+\sum_{i=3}^n 2*\alpha_i w_i=0$.
+    $(T_1+T_2)(\alpha_1 v_1+\cdots+\alpha_n v_n)=0$. Therefore $\alpha_1(w_1+w_2)+\alpha_2(w_1-w_2)+\sum_{i=3}^n 2\alpha_i w_i=0$.
 
-    So we get that $(\alpha_1+\alpha_2)w_1 + (\alpha_1-\alpha_2)w_2+\sum_{i=3}^{n} w_i =0$. We know that the w's are linearly independent, 
+    So we get that $(\alpha_1+\alpha_2)w_1 + (\alpha_1-\alpha_2)w_2+\sum_{i=3}^{n} 2\alpha_iw_i =0$. We know that the w's are linearly independent, 
     therefore $\alpha_i=0, \forall i \in \{3,\dots,n\}$ and $\alpha_1+\alpha_2=0$ and $\alpha_1-\alpha_2=0$. This means that $\alpha_1=\alpha_2=0$, so
     x = 0. Therefore, null $T_1+T_2=\{0\}$, so it is injective, therefore the set given in the hypothesis is not a subspace.
 
 
 \end{solution}
 
+\begin{exercise}
+    Suppose $V$ and $W$ are finite-dimensional with dim $V \geq$ dim $W \geq 2$. Show that $\{T \in \mathcal{L}(V,W): T \text{ is not surjective}\}$ is not a subspace of $\mathcal{L}(V,W)$.
+\end{exercise}
+\begin{solution}
+    I will construct two linear maps that are not surjective, but whose sum is surjective. Let dim $V = n$ and dim $W = m$, where $n \geq m \geq 2$.
+    
+    Let $v_1,\dots,v_n$ be a basis of $V$ and $w_1,\dots,w_m$ be a basis of $W$.
+    
+    Define the following two maps:
+    \begin{itemize}
+        \item $T_1(v_1) = w_1, T_1(v_2) = 0, T_1(v_i) = w_i$ for all $i \in \{3,\dots,m\}$, and $T_1(v_j) = 0$ for all $j \in \{m+1,\dots,n\}$ (if $n > m$)
+        \item $T_2(v_1) = 0, T_2(v_2) = w_2, T_2(v_i) = 0$ for all $i \in \{3,\dots,n\}$
+    \end{itemize}
+    
+    Both $T_1$ and $T_2$ are not surjective because:
+    \begin{itemize}
+        \item For $T_1$: range $T_1 \subseteq$ span$\{w_1, w_3, \dots, w_m\}$, which has dimension $m-1 < m$
+        \item For $T_2$: range $T_2 \subseteq$ span$\{w_2\}$, which has dimension $1 < m$
+    \end{itemize}
+    
+    Now consider $T_1 + T_2$:
+    \begin{itemize}
+        \item $(T_1 + T_2)(v_1) = w_1$
+        \item $(T_1 + T_2)(v_2) = w_2$
+        \item $(T_1 + T_2)(v_i) = w_i$ for all $i \in \{3,\dots,m\}$
+        \item $(T_1 + T_2)(v_j) = 0$ for all $j \in \{m+1,\dots,n\}$ (if $n > m$)
+    \end{itemize}
+    
+    Therefore $(T_1+T_2)(v_i)=w_i, \forall i \in \{1,\dots m\}$ and 0 otherwise.
+
+    If $x \in W$, let $\alpha_1,\dots,\alpha_m$ be the coefficients such that $x=\alpha_1w_1+\cdots+\alpha_m w_m$ because $w_1,\dots,w_m$ is a basis. We will have that 
+$(T_1+T_2)(\alpha_1v_1+\cdots+\alpha_m v_m)=\alpha_1w_1+\cdots+\alpha_m w_m=x$, therefore there is $y \in V$ such that $(T_1+T_2)(y)=x \in W$, $\forall x \in W$. So
+$(T_1+T_2)$ is surjective, therefore the given subspace is not closed under addition. 
+\end{solution}
+
+\begin{exercise}
+    Suppose $T \in \mathcal{L}(V,W)$ is injective and $v_1,\dots,v_n$ is linearly independent in V. Provate that $Tv_1,...,Tv_n$ is linearly independent in W. 
+\end{exercise}
+\begin{solution}
+    Let $\alpha_1,\dots,\alpha_n$ be scalars such that $\alpha_1Tv_1+\cdots+\alpha_n T v_n=0$. We will have that $T(\alpha_1v_1+\cdots+\alpha_nv_n)=0$. We know that 
+    T is injective, therefore null $T=\{0\}$, so $\alpha_1v_1+\cdots+\alpha_nv_n=0$. $v_1,...,v_n$ are linearly independent => $\alpha_1=\cdots=\alpha_n=0$. Therefore $Tv_1,...,Tv_n$ are also linearly 
+    independent, as if  $\alpha_1Tv_1+\cdots+\alpha_n T v_n=0 => \alpha_1=\cdots=\alpha_n=0$
+\end{solution}
+
+\begin{exercise}
+    Suppose $v_1,\dots,v_n$ spans $V$ and $T \in \mathcal{L}(V,W)$. Show that $Tv_1,\dots,Tv_n$ spans range $T$. 
+\end{exercise}
+\begin{solution}
+    Let $x \in $ range $T$, this means that $\exists y \in V$ such that $T(y)=x$. $v_1,...,v_n$ spans V, therefore 
+    $\exists \alpha_1,...,\alpha_n$ scalars such that $\alpha_1v_1+\cdots+\alpha_nv_n$=y. This means that $\alpha_1T(v_1)+\dots+\alpha_nT(v_n)=x$, due to T's linearity. 
+    Therefore, $\forall x \in$ range $T$, $\exists \alpha_1,...,\alpha_n$ such that $\alpha_1Tv_1+\dots+\alpha_n Tv_n=x$. Therefore, $Tv_1,\dots,Tv_n$ span range $T$.
+\end{solution} 
+
+\begin{exercise}
+    Suppose that $V$ is finite-dimensional and that $T \in \mathcal{L}(V,W)$. Prove that there exists 
+    a subspace $U$ of $V$ such that: 
+    \[
+    U \cap \text{ null } T = \{0\} \text{ and range } T=\{Tu: u \in U\}
+    \]
+\end{exercise}
+\begin{solution}
+    Let $t_1,\dots,t_n$ be a basis of range $T$. We know that there must exist $u_1,...,u_n \in V$ such that 
+    $T(u_1)=t_1,...,T(u_n)=t_n$. $T(u_1),...,T(u_n)$ are linearly independent, we can use exercise 4 from 3A 
+    and get that $u_1,...,u_n$ are also linearly independent. 
+
+    I will denote my subspace $U$ to be span $\{u_1,...,u_n\}$. Let $u \in U \cup $ null $T$. 
+    We have that $T(u)=0$. However, $u$ is a linear combination of $\{u_1,...,u_n\}$ so we get that 
+    $\exists \alpha_1,...,\alpha_n$ scalars such that $u=\alpha_1u_1+\cdots+\alpha_n u_n$. Therefore, 
+    $T(\alpha_1u_1+...+\alpha_n u_n)=0 <=> \alpha_1t_1+...+\alpha_nt_n=0$, but $t_1,...,t_n$ are linearly independent, 
+    therefore $\alpha_1=\cdots=\alpha_n=0$. This means that $u=0$. Therefore $U \cup $ null $T$ = $\{0\}$.
+    
+    Finally, I need to prove that range $T=\{Tu: u\in U\}$. I will prove this by double inclusion. 
+
+    Let $x \in $ range $T$. This means that $\exists \alpha_1,...,\alpha_n$ such that $\alpha_1t_1+...+\alpha_nt_n=x$. 
+    If we choose $u=\alpha_1u_1+...+\alpha_n u_n$ , it will be in U because $U=$ span $\{u_1,...,u_n\}$ and we will have that 
+    $T(u)=\alpha_1T(u_1)+...+\alpha_nT(u_n)=\alpha_1t_1+...+\alpha_nt_n=x$. Therefore, $x \in \{Tu: u \in U\}$. Therefore, 
+    range $T \subseteq \{Tu: u \in U\}$.  
+
+    Let $x \in \{Tu: u \in U\}$. This means that $\exists u \in U \subseteq V$ such that $Tu=x$. Therefore, $x \in$ range $T$. 
+    So we have that $\{Tu: u \in U\} \subseteq T$.
+
+    Finally, $\{Tu: u \in U\} = $ range $T$.
+\end{solution}
+\begin{exercise}
+    Suppose $T$ is a linear map from $\mathbb{F}^4$ to $\mathbb{F}^2$ such that 
+    \[
+    \text{null } T = \{(x_1,x_2,x_3,x_4) \in \mathbb{F}^4:x_1=5x_2 \text{ and } x_3=7x_4\}
+    \]
+    Prove that $T$ is surjective. 
+\end{exercise}
+\begin{solution}
+    null $T = \{(x_1,x_2,x_3,x_4) \in \mathbb{F}^4:x_1=5x_2 \text{ and } x_3=7x_4\}$.
+
+    null $T = \{(5x_2,x_2,7x_4,x_4) \in \mathbb{F}^4 | x_2,x_4 \in \mathbb{F}^2 \}$
+
+    null $T = \{x_2(5,1,0,0) + x_4(0,0,7,1) | x_2,x_4 \in \mathbb{F}^2 \}$.
+
+    null $T = $ span $\{(5,1,0,0),(0,0,7,1)\}$. Also, it is clear that (5,1,0,0) and (0,0,7,1) are linearly independent,
+    therefore $\{(5,1,0,0),(0,0,7,1)\}$ is a basis for null $T$. Therefore dim null $T$ = 2. 
+    From the Fundamental Theorem of Linear Maps we have that dim range $T$+dim null $T$ = dim $\mathbb{F}^4$=4. 
+    Therefore, dim range $T$ =2. But range $T$ is a subspace of $\mathbb{F}^2$ which also has dim $\mathbb{F}^2$=2. So we 
+    will have that range $T$ = $\mathbb{F}^2$ which means that $T$ is surjective. 
+\end{solution}
+\begin{exercise}
+    Suppose $U$ is a three-dimensional subspace of $\mathbb{R}^8$ and that $T$ is a linear map from $R^8$ to $R^5$ such that 
+    null $T$ = $U$. Prove that $T$ is surjective. 
+\end{exercise}
+\begin{solution}
+    $U$ is a three-dimensional subspace of $\mathbb{R}^8$, therefore dim $U$ = 3. We have that null $T=U$, so dim null $T$=3.
+    From the Fundamental Theorem of Linear Maps we will have that dim range $T$ = 5. But range $T$ is a subspace of $\mathbb{R}^5$ which also 
+    has dimension 5, therefore range $T$ = $\mathbb{R}^5$ so we will have that T is surjective. 
+\end{solution}
+
+\begin{exercise}
+    Prove that there does not exist a linear map from $\mathbb{F}^5$ to $\mathbb{F}^2$ whose null space equals $\{(x_1,x_2,x_3,x_4,x_5) \in \mathbb{F}^5:x_1=3x_2 \text{ and } x_3=x_4=x_5\}$.
+\end{exercise}
+\begin{solution}
+    Let $T$ be a map with the null space from the hypothesis. We can use the same logical steps as in Exercise 13 and prove that 
+    dim null $T$ = 2. Therefore, using the Fundamental Theorem of Linear Maps we will have that dim range $T$ = 3. However, 
+    range $T$ is a subspace of $\mathbb{F}^2$ which means that dim range $T \leq $ dim $\mathbb{F}^2$=2. This is a contradiction,
+    therefore there exists no linear map defined from $\mathbb{F}^5$ to $\mathbb{F}^2$ with the given null space. 
+\end{solution}
+
+\begin{exercise}
+    Suppose there exists a linear map on $V$ whose null space and range are both finite-dimensional. Prove that $V$ is finite-dimensional.
+\end{exercise}
+\begin{solution}
+    Let $T \in \mathcal{L}(V,V)$ be the linear map such that dim null $T$ = m $\in \mathbb{N}$ and dim range $T$ = n $\in \mathbb{N}$.
+    Let $b_1,...,b_n$ be a basis of range $T$ => $\exists u_1,...,u_n$ such that $T(u_1)=b_1,\dots,T(u_n)=b_n$.
+
+    Let $v \in V$, this means that $T(v) \in$ range $T$. Therefore, $\exists \alpha_1,...,\alpha_n$ such that $T(v)=\alpha_1b_1+...+\alpha_nb_n$. This means 
+    that $T(v)=T(\alpha_1 u_1 + \cdots + \alpha_n u_n) <=> T(v-\alpha_1u_1-\cdots -\alpha_n u_n)=0$. So, $v-\alpha_1u_1-...-\alpha_nu_n \in $ null $T$. 
+
+    The last part tells us that $\exists k_1,...,k_m$ such that $v-\alpha_1u_1-\cdots-\alpha_n u_n = k_1n_1 + \cdots k_m n_m$ where $n_1,...,n_m$ is a basis of null $T$.
+    We have thus proved that for any $v\in V$ there exists n+m scalars such that $v=\alpha_1u_1+\cdots+\alpha_n u_n + k_1n_1 + \cdots + k_m n_m$. Therefore, 
+    $V=$ span $\{u_1,...,u_n,n_1,...,n_m\}$. So V is spanned by a finite list of vectors , therefore V is finite-dimensional.
+\end{solution}
+\begin{exercise}
+    Suppose $V$ and $W$ are both finite-dimensional. Prove that there exists an injective linear map from $V$ to $W$ if and only if 
+    dim $V \leq $ dim $W$.
+\end{exercise}
+\begin{solution}
+    To prove the if and only if, we need to prove both ways of the implication. 
+
+    The left to right implication is that if there exists an injective linear map from $V$ to $W$ then dim $V\leq$ dim $W$. This is 
+    equivalent to If dim $V$ > dim $W$ then there exists no injective linear map from $V$ to $W$ and this was proved in the text.   
+
+    Now the right to left implication is that if dim $V \leq$ dim $W$ then there exists an injective linear map from $V$ to $W$. To build this 
+    linear map we take $v_1,...,v_n$ the basis of V, where dim $V$ = n and $w_1,...,w_m$ the basis of $W$ where dim $W$ = m. We then create the 
+    linear map $T$ such that $T(v_i)=w_i, \forall i \in W$. If $v \in $ null $T$ , we will write $v$ in terms of the basis vectors and get 
+    $T(\alpha_1v_1+...+\alpha_n v_n)=0 <=>\alpha_1w_1+...+\alpha_n w_n=0$, but $w_1,...,w_m$ are linearly independent, therefore $\alpha_1=\cdots=\alpha_n$, so 
+    v=0. This means that null $T=\{0\}$, therefore $T$ is injective.
+\end{solution}
+\begin{exercise}
+    Suppose $V$ and $W$ are both finite-dimensional. Prove that there exists a surjective linear map from $V$ to $W$ if and only if 
+    dim $V \geq $ dim $W$.
+\end{exercise}
+\begin{solution}
+    The left to right implication is that if there exists a surjective linear map from $V$ to $W$ then dim $V \geq$ dim $W$. This is 
+    equivalent to If dim $V$ < dim $W$ then there exists no surjective linear map from $V$ to $W$ and this was proved in the text.   
+
+    Now for the right to the left implication, we denote dim $W$ = m, dim $V$ = n. Then we construct the linear map by taking $T(v_i)=w_i,\forall i \in \{1,...,m\}$ and 
+    $T(v_i)=0 \forall{m+1,...,n}$. Then, it is trivial to prove that this is surjective. 
+\end{solution}
+
+\begin{exercise}
+    Suppose $V$ and $W$ are finite-dimensional and that $U$ is a subspace of $V$. Prove that there exists $T \in \mathcal{L}(V,W)$ such that 
+    null $T=U$ if and only if dim $U\geq$ dim $V$ $-$ dim $W$. 
+\end{exercise}
+\begin{solution}
+    The left to right implication says that if there exists $T \in \mathcal{L}(V,W)$ such that null $T$=$U$ then dim $U \geq$ dim $V -$ dim $W$. Well 
+    we can use the Fundamental Theorem of Linear Maps and get that dim null $T$ + dim range $T$ = dim $V$, which means that dim $U$+dim range $T$ = dim $V$.
+    dim range $T \leq$ dim $W$, therefore $-$ dim range $T\geq$ - dim $W$, so we have that dim $U\geq$ dim $V - $ dim $W$.
+    
+    For the right to left implication we are told that if dim $U \geq$ dim $V$ - dim $W$ then there exists $T \in \mathcal{L}(V,W)$. We can prove the contrapositive,
+    that if dim $U <$ dim $V -$ dim $W$ there is no linear map $T \in \mathcal{L}(V,W)$ such that null $T=U$. 
+    
+    To prove this contrapositive we do it by a proof of contradiction. Let there be a linear map $T \in \mathcal{L}(V,W)$ such that null $T=U$. We know that 
+    dim $U <$ dim $V -$ dim $W$. However, dim range $T$ + dim null $T$ = dim range $T$ + dim $U$ = dim $V$. Therefore dim $U$ = dim $V-$ dim range $T$. This means that 
+    dim $V- $ dim range $T<$  dim $V - $ dim $W$, therefore dim $W<$ dim range $T$ which is a contradiction because range $T$ is a subspace of W. 
+    
+    Q.E.D
+\end{solution}
+\begin{exercise}
+    Suppose $W$ is finite-dimensional and $T \in \mathcal{L}(V,W)$. Prove that $T$ is injective if and only if there exists 
+    $S \in \mathcal{L}(W,W)$ such that $ST$ is the identity operator on $V$.
+\end{exercise}
+\begin{solution}
+    Let's prove the right to left implication. We know there exists $S \in \mathcal{L}(W,V)$ such that $ST$ is the identity operator on V.
+\end{solution}
 \end{document}
