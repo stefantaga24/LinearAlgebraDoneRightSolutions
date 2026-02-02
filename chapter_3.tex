@@ -333,6 +333,275 @@ $(T_1+T_2)$ is surjective, therefore the given subspace is not closed under addi
     $S \in \mathcal{L}(W,W)$ such that $ST$ is the identity operator on $V$.
 \end{exercise}
 \begin{solution}
-    Let's prove the right to left implication. We know there exists $S \in \mathcal{L}(W,V)$ such that $ST$ is the identity operator on V.
+    Let's prove the right to left implication. We know there exists $S \in \mathcal{L}(W,V)$ such that $ST$ is the identity operator on V. Let $u,v \in V$ 
+    such that $T(u)=T(v)$. If $T(u)=T(v)$, this means that $ST(u)=ST(v)$, but $ST$ is the identity operator on $V$, therefore $u=v$. So we obtained 
+    that $\forall u,v \in V$, if $T(u)=T(v)=>u=v$. Therefore $T$ is injective. 
+
+    Now for the left to right implication, we know that $T$ is injective, we want to find $S\in \mathcal{L}(V,W)$ such that $ST$ is the identity operator on V. I will 
+    first define the linear map $S' \in \mathcal{\text{range }T,V}$, such that $S'(x)=T^{-1}(x), \forall{x} in \text{range } T$. Where with $T^{-1}(x)$ I have denoted the 
+    pre-image $v'\in V$ such that $T(v')=x$. We know it is unique because $T$ is injective. Therefore, we can write that $S'(T(v'))=v', \forall {v'} in V$, so $S'(T)$ acts 
+    as the identity operator on $V$. Now, we can use exercise 13 from 3A, because range $T$ is a subspace of $W$ we can extend $S'$ to $S \in \mathcal{l}(W,V)$ such that 
+    $S'(T(v))=S(T(V)), \forall v \in V$ and we have now found the necessary map.   
 \end{solution}
+
+\begin{exercise}
+    Suppose $W$ is finite-dimensional and $T \in \mathcal{L}(V,W)$. Prove that $T$ is surjective if and only if there exists $S \in \mathcal{L}(W,V)$ such that 
+    $TS$ is the identity operator on $W$.
+\end{exercise}
+\begin{solution}
+    Let's prove the right to left implication. If there exists $S \in \mathcal{L}(W,V)$ such that $TS$ is the identity operator on $W$, then we have that 
+    $TS(w)=w, \forall w \in W$. This means that $\forall w \in W$, there exists $v = S(w) \in V$ such that $T(v)=w$. Therefore, $T$ is surjective. 
+
+    Now for the left to right implication. Let $T$ be a surjective linear map from $\mathcal{L}(V,W)$. This means that $\forall w \in W, \exists v' \in V$ such that $T(v')=w$.
+    Let $w_1,\dots,w_n$ be a basis of $W$ where $n$ = dim $W$. We will have that $S(w_i)=v_i$, where $v_i$ is a vector such that $T(v_i)=w_i$. We know $v_i$
+    exists because $T$ is surjective. $S$ is a properly defined map from $W$ to $V$ as we defined it on a basis of $W$. With this construction we have that 
+    $TS(w_i)=w_i, \forall i \in \{1,\dots,n\}$. Now, we will have that 
+    $TS(w)=T(S(\alpha_1 w_1 + \cdots + \alpha_n w_n))=\alpha_1 TS(w_1)+\cdots+\alpha_n TS(w_n)=\alpha_1 w_1+...+\alpha w_n = w$ ,therefore $TS$ acts as the identity operator on $W$. 
+\end{solution}
+\begin{exercise}
+    Suppose $V$ is finite-dimensional, $T \in \mathcal{L}(V,W)$, and $U$ is a subspace of $W$.
+    Prove that $\{v \in V: Tv \in U\}$ is a subspace of V and 
+    \[
+    \text{dim}\{v \in V: Tv \in U\} = \text{dim null } T + \text{dim } (U \cap \text{ range } T).
+    \]
+\end{exercise}
+\begin{solution}
+    First we will prove that $A=\{v \in V: Tv \in U\}$ is a subpsace of V:
+    \begin{itemize}
+    \item $T(0)=0 \in U$, therefore $0 \in A$.
+    \item If $v_1,v_2 \in A$, we have that $Tv_1$ is in U and $Tv_2$ is in U, U is a subspace, therefore $T(v_1+v_2) \in U$, so $v_1+v_2 \in A$. $A$ is closed under addition
+    \item If $v \in A$, then $Tv$ is in U, which means that $\alpha Tv \in U$ , so $T(\alpha v) \in U$ by T's linearity, so $\alpha v \in A$. $A$ is closed under scalar multiplication.
+    \end{itemize} 
+    Therefore, A is a subspace of $V$.
+
+    Now if $v \in $ null $T$, we have that $Tv=0 \in U$, therefore null $T \subseteq A$. We know that 
+    null $T$ is a vector space therefore it is also a subspace of $A$. We take a basis $b_1,\dots,b_m$ of null $T$ where dim null $T$ = m. We can extend the basis over null $T$ to be 
+    a basis over $A$ as $A$ is a finite-dimensional space, let's denote the extension basis vectors $c_{m+1},\dots c_{n}$ where $n$ = dim $A$. 
+    
+    The conclusion of the problem now is equivalent to proving that $n - m=$ dim $(U\cap $ range $T)$. 
+
+    Let $v \in A$, we can write $v=\alpha_1b_1+\cdots+\alpha_m b_m+ \alpha_{m_1}c_{m+1}+\cdots+\alpha_{n}c_{n}$. We will have that 
+    $Tv=T(\alpha_{m+1}c_{m+1}+\cdots+\alpha_n c_{n})=\alpha_{m+1}T(c_{m+1})+\cdots+\alpha_n T(c_{n})$. Therefore if $Tv \in U$, then we can 
+    write it as a linear combination of $T(c_{m+1}),\dots,T(c_{n})$, so $U \cup $ range $T$ = span $\{T(c_{m+1}),\dots,T(c_{n})\}$. 
+    
+    Now we need to prove that $T(c_{m+1}),\dots,T(c_{n})$ are linearly independent. If $\alpha_{m+1}T(c_{m+1})+\cdots+\alpha_n T(c_{n})=0$, 
+    we will have that $T(\alpha_{m+1}c_{m+1}+...+\alpha_nc_{n})=0$, which means $\alpha_{m+1}c_{m+1}+...+\alpha_n c_n \in$ null $T$. This means that 
+    there exist $\alpha_1,...,\alpha_m$ such that $\alpha_{m+1}c_{m+1}+...+\alpha_n c_n = \alpha_1 b_1+ ... + \alpha_m b_n$. But we know that 
+    $b_1,...,b_m,c_{n+1},...,c_{n}$ are linearly independent, so $\alpha_{m+1}=...=\alpha_n$ so we get that $T(c_{m+1}),...,T(c_{n})$ are linearly independent.
+
+    With the result from above we get that $T(c_{m+1}),...,T(c_{n})$ is a basis of $U \cap$ range $T$, so 
+    dim $(U \cap $ range $T) = n-(m+1)+1=n-m$ . Q.E.D.
+\end{solution}
+
+\begin{exercise}
+    Suppose $U$ and $V$ are finite-dimensional vector spaces and $S \in \mathcal{L}(V,W)$ and $T \in \mathcal{L}(U,V)$. Prove that 
+    \[
+    \text{dim null } ST \leq \text{dim null } S + \text{dim null } T. 
+    \]
+\end{exercise}
+\begin{solution}
+    null $ST$ = $\{v \in U: Tv \in \text{null } S\}$. We know that null $S$ is a subspace of $V$. Using exercise 21 we find out that: 
+    \[
+        \text{dim null } ST = \text{dim null } T + \text{dim } (\text{null }S \cap \text{range T})
+    \]
+
+    Clearly, dim (null $S \cap $ range $T$) $\leq$ dim null $S$. So we have proved that: 
+    \[
+        \text{dim null } ST \leq \text{dim null } T + \text{dim null } S
+    \]
+\end{solution}
+\begin{exercise}
+    Suppose $U$ and $V$ are finite-dimensional vector spaces and $S \in \mathcal{L}(V,W)$ and $T \in \mathcal{L}(U,V)$. Prove that: 
+    \[
+        \text{dim range } ST \leq \text{min} \{\text{dim range } S, \text{dim range } T\}
+    \]
+
+\end{exercise}
+\begin{solution}
+    range $ST$ is a vector space and range $ST \subseteq$ range $S$. This means that range $ST$ is a subspace of 
+    range $S$, so we have that dim range $ST$ $\leq$ dim range $S$.
+
+    Now, let $x \in \text{range }ST$, this means that $\exists v'$ such that x=$ST(v')$. Let's take a basis of range $T$, let it be 
+    $b_1,...,b_{n}$ where $n$ = dim range $T$. Therefore, $\exists \alpha_1,...,\alpha_n$ such that $x=S(\alpha_1b_1+...+\alpha_nb_n)$. 
+    $x=\alpha_1 S(b_1)+...+\alpha_n S(b_n)$. So, range $ST$ is the span of the vectors $S(b_1),...,S(b_n)$ which from theory means that
+    we can reduce this spanning set into a basis for $ST$, so dim range $ST\leq n=$ dim range $T$.
+    
+    We have that dim range $ST\leq$ dim range $T$ and dim range $ST \leq$ dim range $S$. In conclusion, 
+     \[
+        \text{dim range } ST \leq \text{min} \{\text{dim range } S, \text{dim range } T\}
+    \] 
+\end{solution}
+\begin{exercise}
+    \begin{itemize}
+        \item Suppose dim $V$ = 5 and $S,T \in \mathcal{V}$ are such that $ST=0$. Prove that dim range $TS \leq 2$.
+        \item Given an example of $S,T \in \mathbb{F}^5$ with $ST=0$ and dim range $TS=2$. 
+    \end{itemize}
+\end{exercise}
+\begin{solution}
+    For the first point, we have that $ST=0 => \text{dim range } ST = 0 => \text{dim null }ST =5$. This means that 
+    $5 \leq $ dim null $S$ + dim null $T$. We know that $S,T \in \mathcal{L}(V)$, therefore dim range $T$ + dim null $T$ + dim range $S$+dim null $S$ =5.
+    Which means that $5 \leq 5-$ dim null $S$ + 5 $-$ dim null $T <=> \text{dim range } S + \text{dim range } T \leq 5$.
+    With the last inequality we have that $2 \min \{\text{dim range }S, \text{dim range }T\} \leq 5$. Which means that 
+    $\min \text{dim range }S + \min \text{dim range }T \leq 2$ because that minimum is an integer. 
+
+    Finally, we know that dim range $TS \leq \min \text{dim range }S + \min \text{dim range }T$ due to symmetry, so 
+    dim range $TS \leq 2$. 
+
+    For the second point, let $v_1,...,v_5$ be a basis of $\mathbb{F}^5$. I will define $S$ and $T$ at the basis vectors:
+    \begin{itemize}
+        \item $S(v_1)=v_1,S(v_2)=v_4,S(v_3)=S(v_4)=S(v_5)=0$
+        \item $T(v_1)=T(v_2)=T(v_3)=v_3,T(v_4)=T(v_5)=v_4$.
+    \end{itemize}
+
+    Therefore we will have: 
+    \begin{itemize}
+        \item $ST(v_1)=ST(v_2)=ST(v_3)=S(v_3)=0,ST(v_4)=ST(v_5)=S(v_4)=0$
+        \item $TS(v_1)=T(v_1)=v_3,TS(v_2)=T(v_4)=v_4,TS(v_3)=TS(v_4)=TS(v_5)=0$
+    \end{itemize}
+    It is clear from here that $ST=0$ and dim range $TS$ = 2 as a basis for range $TS$ is 
+    $\{v_3,v_4\}$.
+\end{solution}
+\begin{exercise}
+    Suppose that $V$ is finite-dimensional and $S,T \in \mathcal{V,W}$. Prove that null $S\subseteq$
+    null $T$ if and only if there exists $E \in \mathcal{W}$ such that $T=ES$. 
+\end{exercise}
+\begin{solution}
+    Let's prove the assertion from left to right. Let null $S \subseteq$ null $T$. I will prove that there 
+    exists $E \in \mathcal{V}$ such that $T=ES$.
+
+    Let $v_1,...,v_n \in V$ be a basis of $V$ with dim $V$ = $n$. Therefore, $S(v_1),...,S(v_n)$ is a 
+    basis for range $S$. I can define $E'$ to be the map on $\mathcal{\text{range } S,W}$ such that 
+    $E'(w)=T(v')$, for $w\in$ range $S$ and $Sv'=v$. Now, for each $w$ we just choose one of the $v'$ such that 
+    $Sv'=v$. What I now have to show is that $E'S(v_i)=T(v_i),\forall v_i$. Let $v_i'$ be the pre-image chosen when 
+    building $E'$ for $S(v_i)$. This means that $E'S(v_i)=E'(v_i')=T(v_i')$, however we know that $S(v_i')=S(v_i)$, therefore 
+    $v_i'-v_i \in $ null $S \subseteq$ null $T$ therefore $v_i'-v_i \subseteq$ null T which means that $T(v_i')=T(v_i)$, so 
+    $E'S(v_i)=T(v_i')=T(v_i)$. So we now have this map $E' \in \mathcal{\text{range }S, W}$ such that $E'S(v_i)=T(v_i)$ for all 
+    $v_i \in V$. I cna extend $E'$ to obtain $E \in \mathcal{W,W}$ such that $E(w)=E'(w),\forall w \in \text{range } S$. 
+
+    So now, we have that $ES(v_i)=T(v_i),\forall v_i \in V$. This completely defines the $ES$ map, and it is clear that
+    $T=ES$. Q.E.D. 
+
+    Now for the assertion from right to left, if there exists the map $E \in \mathcal{W}$ such that $T=ES$. If $x\in $ null $S$, we have that $ES(x)=E(0)=0=T(x)$, so $x \in$ null $T$.
+    Therefore null $S \subseteq$ null $T$. 
+\end{solution}
+\begin{exercise}
+    Suppose that $V$ is finite-dimensional and $S,T \in \mathcal{V,W}$. Prove that range $S\subseteq$
+    range $T$ if and only if there exists $E \in \mathcal{V}$ such that $S=TE$. 
+\end{exercise}
+\begin{solution}
+    Let's prove the assertion from left to right: Let range $S \subseteq$ range $T$. Let $v_1,...,v_n$ be a basis of $V$.
+    As the range of $S$ is included in the range of $T$, for each $S(v_i)$ there exists a $u_i$ such that $T(u_i)=S(v_i)$.
+    I will uniquely define $E \in \mathcal{V}$ such that $E(v_i)=u_i$. This means that $\forall v_i$, $TE(v_i)=T(u_i)=S(v_i)$, 
+    so $TE$ and $S$ are the same map as they have the same unique representation over the basis vectors. 
+    
+    For the assertion from right to left: There exists a map $E \in \mathcal{V}$ such that $S=TE$. Let $x \in$ range $S$. This 
+    means that $\exists v' \in V$ such that $S(v')=x$. But $S(v')=TE(v')=x$, so $x \in$ range $T$ with one of the possible 
+    pre-images being $E(v')$. Therefore, range $S \subseteq$ range $T$. 
+\end{solution}
+\begin{exercise}
+    Suppose $P \in \mathcal{V}$ and $P^2=P$. Prove that $V=$ null $P \oplus$ range $P$.
+\end{exercise}
+\begin{solution}
+    First, let's look at the intersection between null $P$ and range $P$. Let $x \in $ (null $P \cap$ range $P$).
+    We have that $P(x)=0$ and $\exists x' \in V$ s.t $P(x')=x$. This means that $P^2(x')=P(x)$,
+    so $P(x')=0$, but $P(x')=x$, so $x=0$. Therefore null $P \cap$ range $P$ = $\{0\}$. This 
+    means that null $P$ + range $P$ = null $P \oplus$ range $P$.
+
+    From theory we also know that dim (null $P \oplus$ range $P$) = dim null $P$ + dim range $P$ = dim $V$.
+    null $P \oplus$ range $P$ is actually a subspace of $V$, so we will have that null P $\oplus$ range $P$ = $V$.
+\end{solution}
+\begin{exercise}
+    Suppose $D \in \mathcal{\mathcal{P}(\mathbb{R})}$ is such that deg $Dp=$ (deg $p$) - 1 for every 
+    non-constant polynomial $p \in \mathcal{P}(R)$. Prove that $D$ is surjective.  
+\end{exercise}
+\begin{solution}
+    To prove that $D$ is surjective, I will show that $\forall n \in N, x^{n} \in \text{range } D$. Then,
+    it is easy to show that any polynomial of finite degree is in range $T$. 
+
+    To prove the above, I will use strong induction. I define the proposition as being $P(n): x^{n} \in \text{range } D$.
+
+    First we solve the base case. We know that $D(x)$ is a polynomial of degree 0. This means that $\exists t \in \mathbb{R},t \neq 0$
+    such that $D(x)=t$. Because $D$ is linear, we have that $D(\frac{x}{t})=1$ and the division is possible because $t$ is not 0. Therefore,
+    $P(0)$ is true.
+    Now we will solve $P(0),...,P(n-1) - True => P(n) - True$. Given the properties of $D$ we know that $D(x^{n+1})$ must be a polynomial of degree 
+    $n$, $D(x^{n+1})=a_n x^{n} + \cdots + a_0$ , where $a_n$ needs to be different than 0 and the others not necessarily. 
+
+    Now we know that $P(0),\dots,P(n-1)$ are all true, so we denote the pre-image (which exists) of $x^{i}$ with $p_i$ such that $D(p_i)=x^{i}$.
+    Therefore we will find that $D(x^{n+1}-a_{n-1}p_{n-1}-a_{n-2}p_{n-2}-\cdots-a_0p_0)=D(x^{n+1})-a_{n-1}x^{n-1}-...-a_0=x^{n}$. As such, 
+    $P(n)$ is also true.
+
+    Thus, $P(n)-True \forall n \in \mathbb{N}$ so we have that $D$ is surjective.
+\end{solution}
+\begin{exercise}
+    Suppose $p \in \mathcal{P}(\mathbb{R})$. Prove that there exists a polynomial $q \in \mathcal{P}(\mathbb{R})$ such that 
+    $5q''+3q'=p$.
+\end{exercise}
+\begin{solution}
+    We can just define $D \in \mathcal{L}(\mathcal{P}(\mathbb{R}))$ such that $D(q)=5q''+3q'$. 
+    It is clear that it has the property from exercise 28, so we can use the result and say that $D$ is surjective,
+    therefore for every $p \in \mathcal{P}(\mathbb{R})$ , there exists $q$ such that $D(q)=p$ , Q.E.D.
+\end{solution}
+\begin{exercise}
+    Suppose $\varphi \in \mathcal{L}(V,\mathbb{F})$ and $\varphi \neq 0$. Suppose $u \in V$ is not in null $\varphi$. Prove that 
+    \[
+        V = \text{null } \varphi \oplus \{au: a \in \mathbb{F}\}
+    \]
+\end{exercise}
+\begin{solution}
+    range $\varphi$ is a subspace of $F$, therefore dim range $\varphi \in \{0,1\}$. However, 
+    $\varphi \neq 0$, which means that dim range $\varphi=1$. Therefore, dim $V$ = dim null $\varphi$ + 1. 
+
+    Now, let's analyze what null $\varphi \cup \{au: a\in \mathbb{F}\}$ looks like. If $x \in $ null $\varphi$, $\varphi(x)=0$.
+    If $x\in \{au: a\in \mathbb{F}\}$, then there exists $a'$ such that $x=a'u$. Putting them together, we get that $\varphi(a'u)=0$,
+    so $a'\varphi(u)=0$. We know that $\varphi(u)$ cannot be 0, so $a'=0$, so $x=0$. Thus, null $\varphi \cup \{au: a\in \mathbb{F}\}$ = $\{0\}$.
+    This means null $\varphi$ + $\{au: a\in \mathbb{F}\}$ = null $\varphi \oplus \{au: a\in \mathbb{F}\}$.
+
+    From theory this means that dim (null $\varphi \oplus \{au: a\in \mathbb{F}\}$) = dim null $phi$ + dim $\{au: a\in \mathbb{F}\}$
+    = dim null $phi$ + 1. But dim $V$ = dim null $phi$ + 1 and the direct sum is a subspace of $V$ , therefore they must be equal Q.E.D.
+\end{solution}
+\begin{exercise}
+    Suppose $V$ is finite-dimensional, $X$ is a subspace of $V$, and $Y$ is a finite-dimensional subspace of $W$. Prove that
+    there exists $T \in \mathcal{V,W}$ such that null $T$ = $X$ and range $T$ = $Y$ if and only if dim $X$ + dim $Y$ = dim $V$.
+\end{exercise}
+\begin{solution}
+    The left to right proposition is: There exists $T \in \mathcal{L}(V,W)$ such that null $T$ = X and range $T$ = Y. Prove 
+    that dim $X$ + dim $Y$ = dim $V$. This comes easily from the Fundamental Theorem of Linear Maps, dim null $T$ + dim range $T$ =
+    dim $X$ + dim $Y$ = dim $V$.
+
+    The right to left proposition is: If dim $X$+ dim $Y$ = dim $V$ then there exists $T \in \mathcal{L}(V,W)$ such that 
+    null $T$ = $X$ and range $T$ = $Y$. We will get the basis of $X$ to be $x_1,...,x_n$ with n= dim $X$. Then we are going to 
+    extend this basis with the vectors $b_{n+1},...,b_{m}$ where $m$ = dim $V$. Now we know that dim $Y$ = m-n. We can 
+    construct the following linear map $T$: $T(x_i)=0, \forall i \in \{1,...,n\}$ and $T(b_{j})=y_{j-n}, \forall j \in {n+1,...,m}$ , where $y_{1},...,y_{m-n}$
+    is a basis of $Y$. With this construction, $x_1,...,x_n$ will be the basis of null $T$ and $T(b_{j})=y_{j-n}$ will be the basis of range $T$. 
+    This means that the basis of X is the basis of null $T$ and the basis of $Y$ is the basis of range $T$, so null $T$ = X, range $T$ = Y. Q.E.D.   
+\end{solution}
+\begin{exercise}
+    Suppose $V$ is finite-dimensional with dim $V>1$. Show that if $\varphi:\mathcal{L}(V)\rightarrow \mathbb{F}$ is a linear map such that
+    $\varphi(ST)=\varphi(S)\varphi(T)$ for all $S,T \in \mathcal{V}$, then $\varphi=0$. 
+\end{exercise}
+\begin{solution}
+    Let $x\in $ null $\varphi$. Let $E \in \mathcal{V}$ be a random element of that set. We will have:
+    \begin{itemize}
+        \item $\varphi(xE)=\varphi(x)\varphi(E)=0$, so $xE\in $ null $\varphi$.
+        \item $\varphi(Ex)=\varphi(E)\varphi(x)=0$, so $Ex\in $ null $\varphi$.
+    \end{itemize}
+    Therefore null $\varphi$ is a two-sided ideal of $\mathcal{L}(V)$. Using the hint, this means 
+    that null $\varphi$ is either $\{0\}$ or $\mathcal{L}(V)$.
+
+    We need to show that there is a non-zero map in null $\varphi$ and then that means null $\varphi$ = $\mathcal{L}(V)$, so
+    $\varphi=0$.
+
+    We need to create $S$ and $T$ such that $ST=0$ but $S \neq 0$ and $T \neq 0$. We can do this by taking a basis of $V$, 
+    $v_1,...,v_n$ with $n=$ dim $V$ > 1 and then we define: 
+    \begin{itemize}
+        \item $S(v_1)=v_1,S(v_2)=S(v_3)=...=S(v_n)=0$
+        \item $T(v_1)=T(v_2)=...=T(v_n)=0$
+    \end{itemize}
+    We are guaranteed that $v_1 \neq v_2$ because $n \geq 2$. Therefore $ST(v_i)=0. \forall i \in \{1,...,n\}$ so we have that 
+    $\varphi(ST)=0=\varphi(S)*\varphi(T)$ which means that either $S \in $ null $\varphi$ or $T \in $ null $\varphi$. This means that 
+    there is a non trivial element in null $\varphi$ Q.E.D.  
+\end{solution}
+\begin{exercise}
+    This exercise will be added later.
+\end{exercise}
 \end{document}
